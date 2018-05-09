@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    h2 This is title
+    div(class="container")
+        div(class="row")
+            - const header = ['SerialNumber', 'PatientName', 'PatientEmail', 'DoctorEmail', 'DeviceName'];
+            each item in header
+                div(class="col-6")= item
+        each item in data
+            div(class="row")
+                div(class="col-6") #{ item.SerialNumber }
+                div(class="col-6") #{ item.PatientName }
+                div(class="col-6") #{ item.PatientEmail }
+                div(class="col-6") #{ item.DoctorEmail }
+                div(class="col-6") #{ item.DeviceName }
+                div(class="col-6")
+                    a(href="users/data/#{item._id}") check
+
+
+
+
+
+
+

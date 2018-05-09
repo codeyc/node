@@ -1,0 +1,72 @@
+extends layout
+
+block content
+    p #{error}
+    div(id="login")
+        h1 LOGIN
+        form(action="/login", method="post")
+            table
+                tr
+                    td
+                        label account
+                    td
+                        input(type="text", name="username")
+                tr
+                    td
+                        label password
+                    td
+                        input(type="password", name="password")
+                tr
+                    td
+                        input(type="submit", value="login")
+                    td
+                        input(type="button", value="sign", onclick="toSign()")
+    div(id="sign")
+        h1 SIGN
+        a(href="/user") to users
+        form(action="/sign", method="post")
+            table
+                tr
+                    td
+                        label account
+                    td
+                        input(type="text", name="username")
+                tr
+                    td
+                        label password
+                    td
+                        input(type="password", name="password")
+                tr
+                    td
+                        label check password
+                    td
+                        input(type="password", name="check_password")
+                tr
+                    td
+                        input(type="submit", value="sign")
+                    td
+                        input(type="button", value="login", onclick="toLogin()")
+    script(type="text/javascript").
+        const disLogin = document.getElementById('login');
+        const disSign = document.getElementById('sign');
+        disSign.style.display = 'none';
+        function toSign() {
+            disLogin.style.display = 'none';
+            disSign.style.display = 'block';
+        }
+
+        function  toLogin() {
+            disLogin.style.display = 'block';
+            disSign.style.display = 'none';
+        }
+
+
+
+
+
+
+
+
+
+
+
