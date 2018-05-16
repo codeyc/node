@@ -1,46 +1,56 @@
 #### Data Json 
 ```
-_id: String,  // user 1
-SerialNumber: Number,
-PatientName: String,
-PatientEmail: String,
-DoctorEmail: String,
-DeviceName: String,
-UpdateData:[
-    {
-        config: {ComplianceTime: Date, Lanuage: 'English', ...},
-        PresetData: { TreatmentTime: Date, NextPresetUse: Number, ...},
-        UsageData: { PresetNumber: Number, Reserved: String, AnswerData:[{...}], ...},
-        UpdateTime: Date   // Date 1
-    },
-    {
-        config: {ComplianceTime: Date, Lanuage: 'English', ...},
-        PresetData: { TreatmentTime: Date, NextPresetUse: Number, ...},
-        UsageData: { PresetNumber: Number, Reserved: String, AnswerData:[{...}], ...},
-        UpdateTime: Date   // Date 2
-    },
-]
+const UsageDataSchema = new Schema({
+    Type: String,   // U => Usage Data    A => AnswerData
+    DateOfTreatment: { type: String, default: Date.now() },
+    UsageRecord: [{
+        PresetNumber: String,
+        MinOfUse: String,
+        MinOfPause: String,
+        Channel1MaxAmpUsed: String,
+        Channel1AverageAmpUsed: String,
+        Channel2MaxAmpUsed: String,
+        Channel2AverageAmpUsed: String,
+    }],
+    AnswerData: [
+        {
+            Q_Name: String,
+            A_Value: String,
+        }
+    ],
+});
 
+const UserDataSchema = new Schema({
+    SerialNumber: String,
+    PatientName: String,
+    PatientEmail: String,
+    DoctorEmail: String,
+    DeviceName: String,
+    UpdateData: [
+        // Update first time
+        {
+            ConfigData: {
+                ComplianceTime: String,
+                Language: String,
+                Brightness: String,
+                Audible: Boolean,
+                NightMode: Boolean
+            },
+            PresetData: [{
+                    PresetNumber: String,
+                    ElectrodeSize: String,
+                    StimulationType: String,
+                    ModeSettings: String,
+                    TreatmentTime: String,
+                    NumberOfCycles: String,
+                    NextPresetToUse: String,
+                    BeatFrequency: String,
+            }],
+            UsageData: [UsageDataSchema],
+            UpdateTime: { type: String, default: Date.now() },
+        }
+    ],
 
-_id: String,   // user 2
-SerialNumber: Number,
-PatitentName: String,
-PatientEmail: String,
-DoctorEmail: String,
-DeviceName: String,
-UpdateData:[
-    {
-        config: {ComplianceTime: Date, Lanuage: 'English', ...},
-        PresetData: { TreatmentTime: Date, NextPresetUse: Number, ...},
-        UsageData: { PresetNumber: Number, Reserved: String, AnswerData:[{...}], ...},
-        UpdateTime: Date    // Date 1
-    },
-    {
-        config: {ComplianceTime: Date, Lanuage: 'English', ...},
-        PresetData: { TreatmentTime: Date, NextPresetUse: Number, ...},
-        UsageData: { PresetNumber: Number, Reserved: String, AnswerData:[{...}], ...},
-        UpdateTime: Date   // Date2
-    },
-]
+});
 
 ```

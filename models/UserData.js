@@ -3,6 +3,27 @@ const mongoose =require('mongoose');
 
 const Schema = mongoose.Schema;
 
+
+const UsageDataSchema = new Schema({
+    Type: String,   // U => Usage Data    A => AnswerData
+    DateOfTreatment: { type: String, default: Date.now() },
+    UsageRecord: [{
+        PresetNumber: String,
+        MinOfUse: String,
+        MinOfPause: String,
+        Channel1MaxAmpUsed: String,
+        Channel1AverageAmpUsed: String,
+        Channel2MaxAmpUsed: String,
+        Channel2AverageAmpUsed: String,
+    }],
+    AnswerData: [
+        {
+            Q_Name: String,
+            A_Value: String,
+        }
+    ],
+});
+
 const UserDataSchema = new Schema({
     SerialNumber: String,
     PatientName: String,
@@ -10,11 +31,12 @@ const UserDataSchema = new Schema({
     DoctorEmail: String,
     DeviceName: String,
     UpdateData: [
+        // Update first time
         {
             ConfigData: {
                 ComplianceTime: String,
                 Language: String,
-                Brightness: Number,
+                Brightness: String,
                 Audible: Boolean,
                 NightMode: Boolean
             },
@@ -28,18 +50,11 @@ const UserDataSchema = new Schema({
                     NextPresetToUse: String,
                     BeatFrequency: String,
             }],
-            UsageData: {
-                DateOfTreatment: { type: String, default: Date.now()},
-                PresetNumber: Number,
-                MinOfUse: Number,
-                MinOfPause: Number,
-                ChannelMax: Number,
-                ChannelAverage: Number,
-                AnswerData: [],
-            },
-            UpdateTime: { type: String, default: Date.now()},
+            UsageData: [UsageDataSchema],
+            UpdateTime: { type: String, default: Date.now() },
         }
-    ]
+    ],
+
 });
 
 const UserData = mongoose.model('UserData', UserDataSchema);

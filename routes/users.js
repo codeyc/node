@@ -6,7 +6,26 @@ const dtime = require('time-formater');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 
-    let newData = UserData({
+    let childData = {
+        Type: 'U',   // U => Usage Data    A => AnswerData
+        DateOfTreatment: String,
+        UsageRecord: [{
+            PresetNumber: '1',
+            MinOfUse: '5',
+            MinOfPause: '4',
+            Channel1MaxAmpUsed: '5',
+            Channel1AverageAmpUsed: '8',
+            Channel2MaxAmpUsed: '0',
+            Channel2AverageAmpUsed: '5',
+        }],
+        AnswerData: [
+            {
+                Q_Name: 'Q1',
+                A_Value: 'Y',
+            }],
+    };
+
+    const Data = new UserData({
         SerialNumber: '1',
         PatientName: '2',
         PatientEmail: '3',
@@ -17,7 +36,7 @@ router.get('/', function(req, res, next) {
                 ConfigData: {
                     ComplianceTime: '6',
                     Language: '7',
-                    Brightness: 8,
+                    Brightness: '8',
                     Audible: true,
                     NightMode: true
                 },
@@ -40,19 +59,13 @@ router.get('/', function(req, res, next) {
                     NextPresetToUse: '7',
                     BeatFrequency: '8',
                 }],
-                UsageData: {
-                    DateOfTreatment: dtime().format('YYYY-MM-DD HH:mm'),
-                    PresetNumber: 17,
-                    MinOfUse: 18,
-                    MinOfPause: 19,
-                    ChannelMax: 20,
-                    ChannelAverage: 21,
-                    AnswerData: [],
-                },
+                UsageData: [childData],
                 UpdateTime: dtime().format('YYYY-MM-DD HH:mm'),
             }
         ]
-    });
+    })
+
+
 
     UserData.find((err, doc) => {
         if (doc !== null) {
@@ -60,8 +73,22 @@ router.get('/', function(req, res, next) {
         }
     });
 
+    /*Data.save((err, response) => {
+        if(err){
+            console.log('err:',err)
+        }else {
+            //console.log(response);
+            console.log(Data.UpdateData[0].UsageData)
+        }
+    });
+*/
+    //console.log(UserData);
+
    /* newData.save((err, response) => {
-        console.log(response);
+        if (err) {
+            console.log('err:', err);
+        }
+        console.log('res:',response);
     })*/
 
 
