@@ -1,20 +1,26 @@
 extends layout
 
 block content
-    h2 this is title
+    h2 #{ data.UserInfo.DeviceName } Device - #{ data.SerialNumber }
     div(class="row")
         - const header = ['SerialNumber', 'PatientName', 'PatientEmail', 'DoctorEmail', 'DeviceName'];
         each item in header
             div(class="col-5")= item
     div(class="row")
         div(class="col-5") #{ data.SerialNumber }
-        div(class="col-5") #{ data.PatientName }
-        div(class="col-5") #{ data.PatientEmail }
-        div(class="col-5") #{ data.DoctorEmail }
-        div(class="col-5") #{ data.DeviceName }
+        div(class="col-5") #{ data.UserInfo.PatientName }
+        div(class="col-5") #{ data.UserInfo.PatientEmail }
+        div(class="col-5") #{ data.UserInfo.DoctorEmail }
+        div(class="col-5") #{ data.UserInfo.DeviceName }
     div(class="row content")
-        div(class="col-5") #{ data.UpdateData[0].UpdateTime }
-        div(class="col-5") ConfigData
-        div(class="col-5") PresetData
-        div(class="col-5") UsageData
-        a(href="../data/detail/#{data._id}", class="col-5") Detail
+        div(class="col-3") UpdateTime
+        div(class="col-3") UsageData
+        div(class="col-3") Config Data & Preset Data
+    each val, index in data.UpdateData
+        div(class="row")
+            div(class="col-3") #{ data.UpdateData[index].UpdateTime }
+            div(class="col-3")
+                a(href="../data/detail/#{data._id}") Detail
+            div(class="col-3")
+                a(href="../data/detail/#{data._id}") Detail
+

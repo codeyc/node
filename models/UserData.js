@@ -7,6 +7,7 @@ const Schema = mongoose.Schema;
 const UsageDataSchema = new Schema({
     Type: String,   // U => Usage Data    A => AnswerData
     DateOfTreatment: { type: String, default: Date.now() },
+    TimeOfTreatment: String,
     PresetNumber: String,
     MinOfUse: String,
     MinOfPause: String,

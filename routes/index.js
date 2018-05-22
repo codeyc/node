@@ -127,7 +127,8 @@ router.post('/upload', (req, res, next) => {
             if(data.Usage[i][0] === 'U') {
                 Usage.push({
                     Type: data.Usage[i][0],
-                    DateOfTreatment: `${ data.Usage[i][1][0] } ${ data.Usage[i][1][1] }`,
+                    DateOfTreatment: data.Usage[i][1][0],
+                    TimeOfTreatment: data.Usage[i][1][1],
                     PresetNumber: data.Usage[i][2],
                     MinOfUse: data.Usage[i][3],
                     MinOfPause: data.Usage[i][4],
@@ -140,7 +141,8 @@ router.post('/upload', (req, res, next) => {
                 // Q & A
                 Usage.push({
                     Type: data.Usage[i][0],
-                    DateOfTreatment:`${ data.Usage[i][1][0] } ${ data.Usage[i][1][1] }`,
+                    DateOfTreatment: data.Usage[i][1][0],
+                    TimeOfTreatment: data.Usage[i][1][1],
                     PainBefore: data.Usage[i][2],
                     PainAfter: data.Usage[i][3],
                     DecrMeds: data.Usage[i][4],
@@ -150,27 +152,42 @@ router.post('/upload', (req, res, next) => {
             }
         }
 
-        Data.UpdateData.push({
-            ConfigData: Config,
-            PresetData: Preset,
-            UsageData: Usage,
-            UpdateTime: dtime().format('YYYY-MM-DD HH:mm'),
-        });
+
 
         // save data
         UserData.findOne({ 'SerialNumber' : req.body.SerialNumber }, (err, doc) => {
             if (!doc) {
+                Data.UpdateData.push({
+                    ConfigData: Config,
+                    PresetData: Preset,
+                    UsageData: Usage,
+                    UpdateTime: dtime().format('YYYY-MM-DD HH:mm'),
+                });
                 Data.save((err, response) => {
                     // 还未保存过的用户，会新增用户id
-                    console.log('save done');
-                    res.json({'status':'1','data':'success!'});
-                    res.end();
+                    if (err) console.log('err:', err);
+                    else {
+                        console.log('save done');
+                        res.json({'status':'1','data':'success!'});
+                        res.end();
+                    }
                 });
             } else {
                 // 已经保存过的用户，在原来的数据上添加数据
-                console.log('has exist');
-                res.json({'status':'1','data':'data has exist'});
-                res.end();
+                doc.UpdateData.push({
+                    ConfigData: Config,
+                    PresetData: Preset,
+                    UsageData: Usage,
+                    UpdateTime: dtime().format('YYYY-MM-DD HH:mm'),
+                });
+                doc.save((err, response) => {
+                    if (err) console.log('err:', err);
+                    else {
+                        res.json({'status':'1','data':'push success!'});
+                        res.end();
+                    }
+
+                })
             }
         });
     } catch (e) {

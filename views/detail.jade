@@ -1,4 +1,17 @@
 extends layout
 
 block content
-    h2 this is Detail Page
+    h2 #{ data.UserInfo.DeviceName } Device - #{ data.SerialNumber } (Usage Data)
+    div(class="row half bold")
+        div(class="col-2 usage") Usage
+        div(class="col-2 ans") Answer
+    div(class="row content bold")
+        div(class="col-4") Date
+        div(class="col-4") Time
+        div(class="col-4") Preset#
+        div(class="col-4") Min. of Use
+    each item in data.UpdateData
+        each val, index in item.UsageData
+            div(class="row")
+                div(class="col-4") #{ item.UsageData[index].DateOfTreatment }
+
