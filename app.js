@@ -8,6 +8,7 @@ const app = express();
 const index = require('./routes/index');
 const users = require('./routes/users');
 const cors = require('cors');
+const db = require('./db/db');   // connect mongodb
 app.use(cors({
     origin: true,
     credentials: true,
