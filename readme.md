@@ -22,12 +22,15 @@ const UsageDataSchema = new Schema({
 
 const UserDataSchema = new Schema({
     SerialNumber: String,
-    PatientName: String,
-    PatientEmail: String,
-    DoctorEmail: String,
-    DeviceName: String,
+    UserInfo: {
+        PatientName: String,
+        PatientEmail: String,
+        DoctorEmail: String,
+        DeviceName: String,
+    }
+   
     UpdateData: [
-        // Update first time
+        // Update first time  UpdateData[0]
         {
             ConfigData: {
                 ComplianceTime: String,
@@ -36,6 +39,8 @@ const UserDataSchema = new Schema({
                 Audible: Boolean,
                 NightMode: Boolean
             },
+            
+            // 20 个 json 
             PresetData: [{
                     PresetNumber: String,
                     ElectrodeSize: String,

@@ -7,29 +7,28 @@ const Schema = mongoose.Schema;
 const UsageDataSchema = new Schema({
     Type: String,   // U => Usage Data    A => AnswerData
     DateOfTreatment: { type: String, default: Date.now() },
-    UsageRecord: [{
-        PresetNumber: String,
-        MinOfUse: String,
-        MinOfPause: String,
-        Channel1MaxAmpUsed: String,
-        Channel1AverageAmpUsed: String,
-        Channel2MaxAmpUsed: String,
-        Channel2AverageAmpUsed: String,
-    }],
-    AnswerData: [
-        {
-            Q_Name: String,
-            A_Value: String,
-        }
-    ],
+    PresetNumber: String,
+    MinOfUse: String,
+    MinOfPause: String,
+    Channel1MaxAmpUsed: String,
+    Channel1AverageAmpUsed: String,
+    Channel2MaxAmpUsed: String,
+    Channel2AverageAmpUsed: String,
+    PainBefore:  String,
+    PainAfter:  String,
+    DecrMeds:  String,
+    HelpWork:  String,
+    HelpHome:  String,
 });
 
 const UserDataSchema = new Schema({
     SerialNumber: String,
-    PatientName: String,
-    PatientEmail: String,
-    DoctorEmail: String,
-    DeviceName: String,
+    UserInfo: {
+        PatientName: String,
+        PatientEmail: String,
+        DoctorEmail: String,
+        DeviceName: String,
+    },
     UpdateData: [
         // Update first time
         {
@@ -54,7 +53,6 @@ const UserDataSchema = new Schema({
             UpdateTime: { type: String, default: Date.now() },
         }
     ],
-
 });
 
 const UserData = mongoose.model('UserData', UserDataSchema);

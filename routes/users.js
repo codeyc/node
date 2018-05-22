@@ -26,11 +26,13 @@ router.get('/', function(req, res, next) {
     };
 
     const Data = new UserData({
-        SerialNumber: '1',
-        PatientName: '2',
-        PatientEmail: '3',
-        DoctorEmail: '4',
-        DeviceName: '5',
+        UserInfo: {
+            SerialNumber: '1',
+            PatientName: '2',
+            PatientEmail: '3',
+            DoctorEmail: '4',
+            DeviceName: '5',
+        },
         UpdateData: [
             {
                 ConfigData: {
@@ -72,34 +74,7 @@ router.get('/', function(req, res, next) {
             res.render('users', { data: doc });
         }
     });
-
-    /*Data.save((err, response) => {
-        if(err){
-            console.log('err:',err)
-        }else {
-            //console.log(response);
-            console.log(Data.UpdateData[0].UsageData)
-        }
-    });
-*/
-    //console.log(UserData);
-
-   /* newData.save((err, response) => {
-        if (err) {
-            console.log('err:', err);
-        }
-        console.log('res:',response);
-    })*/
-
-
-  // find one + save()
-  /* demo
-  temp.findOne({name:'huochai'},function(err,doc){
-      //{ _id: 5971f93be6f98ec60e3dc86c, name: 'huochai', age: 10 }
-      console.log(doc);
-      doc.age += 100;
-      doc.save();
-  });*/
+    
 });
 
 /*  data page  */
