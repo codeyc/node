@@ -1,0 +1,34 @@
+extends layout
+
+block content
+    h2 #{ data.UserInfo.DeviceName } Device - #{ data.SerialNumber } (Usage Data Detail)
+    - if (data.UpdateData[index].UsageData[i].Type === 'U')
+        h3 Usage Data
+        div(class="row")
+            - const UsageHeader = ['DateOfTreatment', 'TimeOfTreatment', 'PresetNumber', 'MinOfUse', 'MinOfPause', 'Channel1MaxAmpUsed', 'Channel1AverageAmpUsed', 'Channel2MaxAmpUsed', 'Channel2AverageAmpUsed'];
+            each item in UsageHeader
+                div(class="col-9")= item
+        div(class="row")
+            div(class="col-9 usage") #{ data.UpdateData[index].UsageData[i].DateOfTreatment }
+            div(class="col-9 usage") #{ data.UpdateData[index].UsageData[i].TimeOfTreatment }
+            div(class="col-9 usage") #{ data.UpdateData[index].UsageData[i].PresetNumber }
+            div(class="col-9 usage") #{ data.UpdateData[index].UsageData[i].MinOfUse }
+            div(class="col-9 usage") #{ data.UpdateData[index].UsageData[i].MinOfPause }
+            div(class="col-9 usage") #{ data.UpdateData[index].UsageData[i].Channel1MaxAmpUsed }
+            div(class="col-9 usage") #{ data.UpdateData[index].UsageData[i].Channel1AverageAmpUsed }
+            div(class="col-9 usage") #{ data.UpdateData[index].UsageData[i].Channel2MaxAmpUsed }
+            div(class="col-9 usage") #{ data.UpdateData[index].UsageData[i].Channel2AverageAmpUsed }
+    - if (data.UpdateData[index].UsageData[i].Type === 'A')
+        h3 Answer Data
+        div(class="row")
+            - const AnswerHeader = ['DateOfTreatment', 'TimeOfTreatment', 'PainBefore', 'PainAfter', 'DecrMeds', 'HelpWork', 'HelpHome'];
+            each item in AnswerHeader
+                div(class="col-7")= item
+        div(class="row")
+            div(class="col-7 ans") #{ data.UpdateData[index].UsageData[i].DateOfTreatment }
+            div(class="col-7 ans") #{ data.UpdateData[index].UsageData[i].TimeOfTreatment }
+            div(class="col-7 ans") #{ data.UpdateData[index].UsageData[i].PainBefore }
+            div(class="col-7 ans") #{ data.UpdateData[index].UsageData[i].PainAfter }
+            div(class="col-7 ans") #{ data.UpdateData[index].UsageData[i].DecrMeds }
+            div(class="col-7 ans") #{ data.UpdateData[index].UsageData[i].HelpWork }
+            div(class="col-7 ans") #{ data.UpdateData[index].UsageData[i].HelpHome }

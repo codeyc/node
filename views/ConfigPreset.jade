@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    h2 #{ data.UserInfo.DeviceName } Device - #{ data.SerialNumber } (Config Data & Preset Data)
+    h3 Config Data
+    div(class="row")
+        - const ConfigHeader = ['ComplianceTime', 'Language', 'Brightness', 'Audible', 'NightMode'];
+        each item in ConfigHeader
+            div(class="col-5")= item
+    div(class="row")
+        div(class="col-5") #{ data.UpdateData[index].ConfigData.ComplianceTime }
+        div(class="col-5") #{ data.UpdateData[index].ConfigData.Language }
+        div(class="col-5") #{ data.UpdateData[index].ConfigData.Brightness }
+        div(class="col-5") #{ data.UpdateData[index].ConfigData.Audible }
+        div(class="col-5") #{ data.UpdateData[index].ConfigData.NightMode }
+    h3 Preset Data
+    div(class="row")
+        - const PresetHeader = ['PresetNumber', 'ElectrodeSize', 'StimulationType', 'ModeSettings', 'TreatmentTime', 'NumberOfCycles', 'NextPresetToUse', 'BeatFrequency'];
+        each item in PresetHeader
+            div(class="col-8")= item
+    each val, i in data.UpdateData[index].PresetData
+        div(class="row")
+            div(class="col-8") #{ data.UpdateData[index].PresetData[i].PresetNumber }
+            div(class="col-8") #{ data.UpdateData[index].PresetData[i].ElectrodeSize }
+            div(class="col-8") #{ data.UpdateData[index].PresetData[i].StimulationType }
+            div(class="col-8") #{ data.UpdateData[index].PresetData[i].ModeSettings }
+            div(class="col-8") #{ data.UpdateData[index].PresetData[i].TreatmentTime }
+            div(class="col-8") #{ data.UpdateData[index].PresetData[i].NumberOfCycles }
+            div(class="col-8") #{ data.UpdateData[index].PresetData[i].NextPresetToUse }
+            div(class="col-8") #{ data.UpdateData[index].PresetData[i].BeatFrequency }

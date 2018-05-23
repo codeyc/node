@@ -6,12 +6,24 @@ block content
         div(class="col-2 usage") Usage
         div(class="col-2 ans") Answer
     div(class="row content bold")
-        div(class="col-4") Date
-        div(class="col-4") Time
-        div(class="col-4") Preset#
-        div(class="col-4") Min. of Use
-    each item in data.UpdateData
-        each val, index in item.UsageData
-            div(class="row")
-                div(class="col-4") #{ item.UsageData[index].DateOfTreatment }
+        - const UsageHeader = ['Date', 'Time', 'Preset#', 'Min. of Use'];
+        each item in UsageHeader
+            div(class="col-4")= item
+    each val, i in data.UpdateData[index].UsageData
+        div(class="row")
+            - if (data.UpdateData[index].UsageData[i].Type === 'U')
+                div(class="col-4 usage") #{ data.UpdateData[index].UsageData[i].DateOfTreatment }
+                div(class="col-4 usage") #{ data.UpdateData[index].UsageData[i].TimeOfTreatment }
+                div(class="col-4 usage") #{ data.UpdateData[index].UsageData[i].PresetNumber }
+                div(class="col-4 usage") #{ data.UpdateData[index].UsageData[i].MinOfUse }
+                a(href="../detail/more/#{ index }/#{ i }", class="more usage") &gt;&gt;
+            - if (data.UpdateData[index].UsageData[i].Type === 'A')
+                div(class="col-4 ans") #{ data.UpdateData[index].UsageData[i].DateOfTreatment }
+                div(class="col-4 ans") #{ data.UpdateData[index].UsageData[i].TimeOfTreatment }
+                div(class="col-10 ans") #{ data.UpdateData[index].UsageData[i].PainBefore }
+                div(class="col-10 ans") #{ data.UpdateData[index].UsageData[i].PainAfter }
+                div(class="col-10 ans") #{ data.UpdateData[index].UsageData[i].DecrMeds }
+                div(class="col-10 ans") #{ data.UpdateData[index].UsageData[i].HelpWork }
+                div(class="col-10 ans") #{ data.UpdateData[index].UsageData[i].HelpHome }
+                a(href="../detail/more/#{ index }/#{ i }", class="more ans") &gt;&gt;
 
