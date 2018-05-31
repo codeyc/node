@@ -6,6 +6,9 @@ a {
     color: #00B7FF;
     text-decoration: none;
 }
+.center{
+    text-align: center;
+}
 
 
 /* users css */
@@ -69,4 +72,10 @@ a {
 }
 .more{
     padding-right: 20px;
+}
+
+.title{
+    line-height: 25px;
+    padding: 0 10px;
+    background: #ccc;
 }

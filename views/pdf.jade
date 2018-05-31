@@ -1,0 +1,7 @@
+extends layout
+
+block content
+    img(src="", id="img")
+    iframe(srcdoc="#{data}", width="1000", height="1000")
+    form(action="../users/SendPDF", method="post")
+        input(type="submit", value="print")

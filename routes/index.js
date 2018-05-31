@@ -6,7 +6,7 @@ const Upload = require('../controller/api/upload');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+    res.render('index');
 });
 
 router.post('/sign', Admin.sign);

@@ -2,6 +2,7 @@ extends layout
 
 block content
     p #{error}
+    a(href="users/pdf", target="_blank") to PDF
     div(id="login")
         h1 LOGIN
         form(action="/login", method="post")

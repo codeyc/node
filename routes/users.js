@@ -8,5 +8,7 @@ router.get('/data/:id', Users.data);
 router.get('/data/detail/:index', Users.detail);
 router.get('/data/detail/more/:index/:i', Users.more);
 router.get('/data/ConfigPreset/:index', Users.Config);
+router.get('/pdf', Users.pdf);
+router.post('/SendPDF', Users.SendPDF);
 
 module.exports = router;
