@@ -150,6 +150,7 @@ class Users {
         pdf.create(html).toFile('out.pdf', (err, response) => {
             console.log(response)
         });
+
         res.render('pdf', {
             title: 'this is pdf',
             data: html
